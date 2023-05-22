@@ -1,0 +1,5 @@
+flask
+gunicorn
+flask-login
+Flask-SQLAlchemy
+pyrfc3339

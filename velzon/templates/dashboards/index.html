@@ -1,0 +1,2295 @@
+{% extends "partials/base.html" %}
+{% block title %}Insights{% endblock title %}
+{% block extra_css %}
+    <!-- jsvectormap css -->
+    <link href="{{url_for('static' ,filename='libs/jsvectormap/dist/css/jsvectormap.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{url_for('static' ,filename='libs/leaflet/dist/leaflet.css')}}" rel="stylesheet" type="text/css" />
+    <!--Swiper slider css-->
+    <link href="{{url_for('static' ,filename='libs/swiper/swiper-bundle.min.css')}}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{{url_for('static' ,filename='libs/nouislider/dist/nouislider.min.css')}}">
+    <style>
+        img.a { filter: hue-rotate(300deg); }
+        img.b { filter: hue-rotate(180deg); }
+        img.d { filter: sepia(100%) hue-rotate(170deg); }
+	::-webkit-scrollbar {display: none;}
+    </style>
+{% endblock extra_css %}
+
+{% block content %}
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="main-content">
+
+            <div class="page-content">
+                <div class="container-fluid">   
+                
+                    <div class="row">
+                        <div class="col">
+
+                            <div class="h-100">
+                                <div class="row mb-3 pb-1">
+                                    <div class="col-12">
+                                        <div class="d-flex align-items-lg-center flex-lg-row flex-column">
+                                            <div class="flex-grow-1">
+                                                <h4 class="fs-16 mb-1">Good Morning, {{username}}!</h4>
+                                                <p class="text-muted mb-0" style="display:none;">Here's what's happening with SmartGEO today.</p>
+                                            </div>
+                                            <div class="mt-3 mt-lg-0">
+                                                <form action="javascript:void(0);">
+                                                    <div class="row g-3 mb-0 align-items-center">
+                                                        <div class="col-sm-auto">
+                                                            <div class="input-group">
+                                                                <label class="input-group-text" for="inputGroupSelect01"><img id="flag" src="{{url_for('static' ,filename='images/flags/sa.svg')}}" alt="user-image" class="me-2 rounded" height="18">Country</label>
+                                                                <select class="form-select" id="inputGroupSelect01">
+                                                                    <option >Choose...</option>
+                                                                    <option selected value="1">KSA</option>
+
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <!--end col-->
+                                                        <div class="col-auto" onclick="window.location.href=window.location.href+'dashboard-crypto/'">
+                                                            <button type="button" class="btn btn-soft-success"><i class="ri-add-circle-line align-middle me-1"></i> New Search</button>
+                                                        </div>
+                                                        <!--end col-->
+                                                        <div class="col-auto" style="display:none;">
+                                                            <button title="SmartGEO Pulse" type="button" class="btn btn-soft-info btn-icon waves-effect waves-light layout-rightside-btn"><i class="ri-pulse-line"></i></button>
+                                                        </div>
+                                                        <!--end col-->
+                                                    </div>
+                                                    <!--end row-->
+                                                </form>
+                                            </div>
+                                        </div><!-- end card header -->
+                                    </div>
+                                    <!--end col-->
+                                </div>
+                                <!--end row-->
+
+                                <div class="row">
+                                    <div class="col-xl-3 col-md-6">
+                                        <!-- card -->
+                                        <div class="card card-animate">
+                                            <div class="card-body">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-grow-1 overflow-hidden">
+                                                     <p class="text-uppercase fw-medium text-muted text-truncate mb-0">Cities</p>
+                                                    </div>
+                                                    <div class="flex-shrink-0">
+                                                        <h5 class="text-success fs-14 mb-0">
+                                                            <i class="ri-arrow-right-up-line fs-13 align-middle"></i> 3.57 %
+                                                        </h5>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex align-items-end justify-content-between mt-4">
+                                                    <div>
+                                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value" data-target="10">0</span></h4>
+                                                        <a style="display:none;" href="" class="text-decoration-underline">View all cities</a>
+                                                    </div>
+                                                    <div class="avatar-sm flex-shrink-0">
+                                                        <span class="avatar-title bg-soft-info rounded fs-3">
+                                                            <i class="bx bxs-city text-info"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div><!-- end card body -->
+                                        </div><!-- end card -->
+                                    </div><!-- end col -->
+
+                                    <div class="col-xl-3 col-md-6">
+                                        <!-- card -->
+                                        <div class="card card-animate">
+                                            <div class="card-body">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-grow-1 overflow-hidden">
+                                                        <p class="text-uppercase fw-medium text-muted text-truncate mb-0">Banks</p>
+                                                    </div>
+                                                    <div class="flex-shrink-0">
+                                                        <h5 class="text-success fs-14 mb-0">
+                                                            <i class="ri-arrow-right-up-line fs-13 align-middle"></i> +29.08 %
+                                                        </h5>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex align-items-end justify-content-between mt-4">
+                                                    <div>
+                                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value" data-target="5">0</span> </h4>
+                                                        <a style="display:none;"  href="" class="text-decoration-underline">See details</a>
+                                                    </div>
+                                                    <div class="avatar-sm flex-shrink-0">
+                                                        <span class="avatar-title bg-soft-warning rounded fs-3">
+                                                            <i class="bx bx-dollar-circle text-warning"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div><!-- end card body -->
+                                        </div><!-- end card -->
+                                    </div><!-- end col -->
+
+                                    <div class="col-xl-3 col-md-6">
+                                        <!-- card -->
+                                        <div class="card card-animate">
+                                            <div class="card-body">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-grow-1 overflow-hidden">
+                                                        <p class="text-uppercase fw-medium text-muted text-truncate mb-0"> LOCATIONS </p>
+                                                    </div>
+                                                    <div class="flex-shrink-0">
+                                                        <h5 class="text-muted fs-14 mb-0">
+                                                            +0.05 %
+                                                        </h5>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex align-items-end justify-content-between mt-4">
+                                                    <div>
+                                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value" data-target="120">0</span></h4>
+                                                        <a style="display:none;" href="#" class="text-decoration-underline">see all locations</a>
+                                                    </div>
+                                                    <div class="avatar-sm flex-shrink-0">
+                                                        <span class="avatar-title bg-soft-primary rounded fs-3">
+                                                            <i class=" bx bx-location-plus text-primary"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div><!-- end card body -->
+                                        </div><!-- end card -->
+                                    </div><!-- end col -->
+                                    <div class="col-xl-3 col-md-6">
+                                        <!-- card -->
+                                        <div class="card card-animate">
+                                            <div class="card-body">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-grow-1 overflow-hidden">
+                                                        <p class="text-uppercase fw-medium text-muted text-truncate mb-0" style="font-size: smaller;"> Per Capita Income</p>
+                                                    </div>
+                                                    <div class="flex-shrink-0">
+                                                        <h5 class="text-success fs-14 mb-0">
+                                                            <i class="ri-arrow-right-up-line fs-13 align-middle"></i> +16.24 %
+                                                        </h5>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex align-items-end justify-content-between mt-4">
+                                                    <div>
+                                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4">SAR <span class="counter-value" data-target="23">0</span>K</h4>
+                                                        <a style="display:none;" href="" class="text-decoration-underline">View demographics</a>
+                                                    </div>
+                                                    <div class="avatar-sm flex-shrink-0">
+                                                        <span class="avatar-title bg-soft-success rounded fs-3">
+                                                            <i class="bx bx-user-circle text-success"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div><!-- end card body -->
+                                        </div><!-- end card -->
+                                    </div><!-- end col -->
+                                </div> <!-- end row-->
+
+                                <div class="row">
+                                    <div class="col-xl-8">
+                                        <div class="card">
+                                            <div class="card-header border-0 align-items-center d-flex">
+                                                <h4 class="card-title mb-0 flex-grow-1">Geo Presence</h4>
+                                                <div>
+                                                    <button type="button" class="btn btn-soft-secondary btn-sm" onclick="showpreferred()">
+                                                        PREFERRED BANKING
+                                                    </button>
+                                                    <button type="button" class="btn btn-soft-warning btn-sm" onclick="showpremium()">
+                                                        CORPORATE BANKING
+                                                    </button>
+                                                    <button type="button" class="btn btn-soft-success btn-sm" onclick="showatm()">
+                                                        REGULAR BANKING
+                                                    </button>
+                                                    <button type="button" class="btn btn-soft-light btn-sm" onclick="showall()">
+                                                        OTHER BANKS
+                                                    </button>
+                                                </div>
+                                            </div><!-- end card header -->
+
+                                            <div class="card-header p-0 border-0 bg-soft-light" style="display:none;">
+                                                <div class="row g-0 text-center">
+                                                    <div class="col-6 col-sm-3">
+                                                        <div class="p-3 border border-dashed border-start-0">
+                                                            <h5 class="mb-1"><span class="counter-value" data-target="7585">0</span></h5>
+                                                            <p class="text-muted mb-0">Cities</p>
+                                                        </div>
+                                                    </div>
+                                                    <!--end col-->
+                                                    <div class="col-6 col-sm-3">
+                                                        <div class="p-3 border border-dashed border-start-0">
+                                                            <h5 class="mb-1">SAR<span class="counter-value" data-target="22.89">0</span>k</h5>
+                                                            <p class="text-muted mb-0">Earnings</p>
+                                                        </div>
+                                                    </div>
+                                                    <!--end col-->
+                                                    <div class="col-6 col-sm-3">
+                                                        <div class="p-3 border border-dashed border-start-0">
+                                                            <h5 class="mb-1"><span class="counter-value" data-target="3">0</span></h5>
+                                                            <p class="text-muted mb-0">Countries</p>
+                                                        </div>
+                                                    </div>
+                                                    <!--end col-->
+                                                    <div class="col-6 col-sm-3">
+                                                        <div class="p-3 border border-dashed border-start-0 border-end-0">
+                                                            <h5 class="mb-1 text-success"><span class="counter-value" data-target="18.92">0</span>%</h5>
+                                                            <p class="text-muted mb-0">Conversation Ratio</p>
+                                                        </div>
+                                                    </div>
+                                                    <!--end col-->
+                                                </div>
+                                            </div><!-- end card header -->
+
+                                            <div class="card-body p-0 pb-2" style="display:block;">
+                                                <div class="w-100">
+                                                    <div style="display:none;" id="customer_impression_charts" data-colors='["--vz-primary", "--vz-success", "--vz-danger"]' class="apex-charts" dir="ltr"></div>
+                                                    <div id="leaflet-map-marker" class="leaflet-map" style="height:446px;"></div>
+                                                </div>
+                                            </div><!-- end card body -->
+                                        </div><!-- end card -->
+                                    </div><!-- end col -->
+                                    <div class="col-xl-4">
+                                        <!-- card -->
+                                        <div class="card card-height-100">
+                                            <div class="card-header border-bottom-dashed align-items-center d-flex">
+                                                <h4 class="card-title mb-0 flex-grow-1">SmartGEO Filter</h4>
+                                                <div>
+                                                    <div class="dropdown" style="display:none;">
+                                                        <button class="btn btn-soft-primary btn-sm" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <span class="text-uppercase">TRNX<i class="mdi mdi-chevron-down align-middle ms-1"></i></span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-end">
+                                                            <a class="dropdown-item" href="#">TRNX</a>
+                                                            <a class="dropdown-item" href="#">ER</a>
+                                                            <a class="dropdown-item" href="#">NPS</a>
+                                                            <a class="dropdown-item" href="#">REV</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- end cardheader -->
+                                            <div class="card-body">
+                                                <div id="portfolio_donut_charts" data-colors='["--vz-primary", "--vz-info", "--vz-warning", "--vz-success"]' class="apex-charts" dir="ltr"></div>
+                                                <ul class="list-group list-group-flush border-dashed mb-0">
+                                                    <li class="list-group-item px-0">
+                                                        <div class="">
+                                                            <div class="row" id="">
+                                                                <div class="col-lg-12">
+                                                                    <label for="websiteUrl" class="form-label">Total Customers : 0K - <span id="val5">100</span><span>K</span></label>
+                                                                </div>
+                                                                <div class="col-lg-12">
+                                                                    <input type="range" class="form-range" min="0" max="100" step="10" id="customers" oninput="filterCust()" value="100">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li><!-- end -->
+                                                    <li class="list-group-item px-0">
+                                                        <div class="">
+                                                            <div class="row" id="">
+                                                                <div class="col-lg-12">
+                                                                    <label for="websiteUrl" class="form-label">Number Of Transactions : 0M - <span id="val1">10</span><span>M</span></label>
+                                                                </div>
+                                                                <div class="col-lg-12">
+                                                                    <input type="range" class="form-range" min="0" max="10" id="transactions" oninput="filterTrnx()" value="10">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li><!-- end -->
+                                                    <li class="list-group-item px-0">
+                                                        <div class="">
+                                                            <div class="row" id="">
+                                                                <div class="col-lg-12">
+                                                                    <label for="websiteUrl" class="form-label">Efficiency Ratio : 0% - <span id="val2">100</span><span>%</span></label>
+                                                                </div>
+                                                                <div class="col-lg-12">
+                                                                    <input type="range" class="form-range" min="0" max="100" id="efficiency" step="10" id="ratio" oninput="filtereff()" value="100">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li><!-- end -->
+                                                    <li class="list-group-item px-0">
+                                                        <div class="">
+                                                            <div class="row" id="">
+                                                                <div class="col-lg-12">
+                                                                    <label for="websiteUrl" class="form-label">NPS Score : 0 - <span id="val3">100</span><span></span></label>
+                                                                </div>
+                                                                <div class="col-lg-12">
+                                                                    <input type="range" class="form-range" min="0" max="100" id="nps" step="10" id="ratio" oninput="filternps()" value="100">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li><!-- end -->
+                                                    <li class="list-group-item px-0">
+                                                        <div class="">
+                                                            <div class="row" id="">
+                                                                <div class="col-lg-12">
+                                                                    <label for="websiteUrl" class="form-label">Revenue : 0M - <span id="val4">10</span><span>M</span></label>
+                                                                </div>
+                                                                <div class="col-lg-12">
+                                                                    <input type="range" class="form-range" id="revenue" min="0" max="10" oninput="filterRev()" value="10">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li><!-- end -->
+                                                    <li class="list-group-item px-0" style="display:none;">
+                                                        <div class="d-flex">
+                                                            <div class="flex-shrink-0 avatar-xs">
+                                                                <span class="avatar-title bg-light p-1 rounded-circle">
+                                                                </span>
+                                                            </div>
+                                                            <div class="flex-grow-1 ms-2">
+                                                                <select class="form-select rounded-pill mb-3" aria-label="Default select example" id="city">
+                                                                    <option selected>Select City</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </li><!-- end -->
+                                                    <li class="list-group-item px-0" style="display:none;">
+                                                        <div class="d-flex">
+                                                            <div class="flex-shrink-0 avatar-xs">
+                                                                <span class="avatar-title bg-light p-1 rounded-circle">
+                                                                </span>
+                                                            </div>
+                                                            <div class="flex-grow-1 ms-2">
+                                                                <select class="form-select rounded-pill mb-3" aria-label="Default select example" id="area">
+                                                                    <option selected>Select Area</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-group-item px-0" style="display:none;">
+                                                        <div class="d-flex">
+                                                            <div class="flex-shrink-0 avatar-xs">
+                                                                <span class="avatar-title bg-light p-1 rounded-circle">
+                                                                </span>
+                                                            </div>
+                                                            <div class="flex-grow-1 ms-2">
+                                                                <select class="form-select rounded-pill mb-3" aria-label="Default select example" id="type">
+                                                                    <option selected>Select Type</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul><!-- end -->
+                                            </div><!-- end card body -->
+                                        </div><!-- end card -->
+                                        <!-- end card -->
+                                    </div>
+                                    <!-- end col -->
+                                </div>
+                                <div class="row" style="display:none;">
+                                    <div class="col-xl-6">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h4 class="card-title mb-0">Offline Banking Penetration %</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <div id="chart-bar" data-colors='["--vz-success"]' class="e-charts"></div>
+                                            </div>
+                                        </div>
+                                        <!-- end card -->
+                                    </div>
+                                    <!-- end col -->
+                                    <div class="col-xl-6">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h4 class="card-title mb-0">Top 5 Banks ROI Growth %</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <div id="chart-horizontal-bar" data-colors='["--vz-primary", "--vz-success", "--vz-warning", "--vz-danger", "--vz-info"]' class="e-charts"></div>
+                                            </div>
+                                        </div>
+                                        <!-- end card -->
+                                    </div>
+                                    <!-- end col -->
+                                </div>
+                                <div class="row">
+                                    <div class="col-xl-6">
+                                        <div class="card">
+                                            <div class="card-header align-items-center d-flex">
+                                                <h4 class="card-title mb-0 flex-grow-1">Top 5 Banks Presence FY 2022-2023</h4>
+                                                <div class="flex-shrink-0" style="display:none;">
+                                                    <div class="dropdown card-header-dropdown">
+                                                        <a class="text-reset dropdown-btn" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <span class="fw-semibold text-uppercase fs-12">Sort by:
+                                                            </span><span class="text-muted">Today<i class="mdi mdi-chevron-down ms-1"></i></span>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-end">
+                                                            <a class="dropdown-item" href="#">Today</a>
+                                                            <a class="dropdown-item" href="#">Yesterday</a>
+                                                            <a class="dropdown-item" href="#">Last 7 Days</a>
+                                                            <a class="dropdown-item" href="#">Last 30 Days</a>
+                                                            <a class="dropdown-item" href="#">This Month</a>
+                                                            <a class="dropdown-item" href="#">Last Month</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- end card header -->
+
+                                            <div class="card-body">
+                                                <div class="table-responsive table-card">
+                                                    <table class="table table-hover table-centered align-middle table-nowrap mb-0">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="avatar-sm bg-light rounded p-1 me-2">
+                                                                            <h1>🏙️</h1>
+                                                                        </div>
+                                                                        <div>
+                                                                            <h5 class="fs-14 my-1"><a href="/apps/ecommerce/product_details" class="text-reset">Bank ABC</a></h5>
+                                                                            <span class="text-muted">Bank</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 class="fs-14 my-1 fw-normal">SAR 29 mn</h5>
+                                                                    <span class="text-muted">Revenue</span>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 class="fs-14 my-1 fw-normal">62</h5>
+                                                                    <span class="text-muted">Branch</span>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 class="fs-14 my-1 fw-normal">510</h5>
+                                                                    <span class="text-muted">ATM</span>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 class="fs-14 my-1 fw-normal">17%<i class="ri-bar-chart-fill text-success fs-16 align-middle ms-2"></i></h5>
+                                                                    <span class="text-muted">Growth</span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="avatar-sm bg-light rounded p-1 me-2">
+                                                                            <h1>🌆</h1>
+                                                                        </div>
+                                                                        <div>
+                                                                            <h5 class="fs-14 my-1"><a href="/apps/ecommerce/product_details" class="text-reset">Bank LKP</a></h5>
+                                                                            <span class="text-muted">Bank</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 class="fs-14 my-1 fw-normal">SAR 85.2 mn</h5>
+                                                                    <span class="text-muted">Revenue</span>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 class="fs-14 my-1 fw-normal">35</h5>
+                                                                    <span class="text-muted">Branch</span>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 class="fs-14 my-1 fw-normal">189</h5>
+                                                                    <span class="text-muted">ATM</span>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 class="fs-14 my-1 fw-normal">29%<i class="ri-bar-chart-fill text-success fs-16 align-middle ms-2"></i></h5>
+                                                                    <span class="text-muted">Growth</span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="avatar-sm bg-light rounded p-1 me-2">
+                                                                            <h1>🏙️</h1>
+                                                                        </div>
+                                                                        <div>
+                                                                            <h5 class="fs-14 my-1"><a href="/apps/ecommerce/product_details" class="text-reset">Bank DEF</a></h5>
+                                                                            <span class="text-muted">Bank</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 class="fs-14 my-1 fw-normal">SAR 14 mn</h5>
+                                                                    <span class="text-muted">Revenue</span>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 class="fs-14 my-1 fw-normal">29</h5>
+                                                                    <span class="text-muted">Branch</span>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 class="fs-14 my-1 fw-normal">74</h5>
+                                                                    <span class="text-muted">ATM</span>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 class="fs-14 my-1 fw-normal">13%<i class="ri-bar-chart-fill text-success fs-16 align-middle ms-2"></i></h5>
+                                                                    <span class="text-muted">Growth</span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="avatar-sm bg-light rounded p-1 me-2">
+                                                                            <h1>🏙️</h1>
+                                                                        </div>
+                                                                        <div>
+                                                                            <h5 class="fs-14 my-1"><a href="/apps/ecommerce/product_details" class="text-reset">Bank XYZ</a></h5>
+                                                                            <span class="text-muted">Bank</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 class="fs-14 my-1 fw-normal">SAR 42 mn</h5>
+                                                                    <span class="text-muted">Revenue</span>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 class="fs-14 my-1 fw-normal">56</h5>
+                                                                    <span class="text-muted">Branch</span>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 class="fs-14 my-1 fw-normal">84</h5>
+                                                                    <span class="text-muted">ATM</span>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 class="fs-14 my-1 fw-normal">8%<i class="ri-bar-chart-fill text-success fs-16 align-middle ms-2"></i></h5>
+                                                                    <span class="text-muted">Growth</span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="avatar-sm bg-light rounded p-1 me-2">
+                                                                            <h1>🌆</h1>
+                                                                        </div>
+                                                                        <div>
+                                                                            <h5 class="fs-14 my-1"><a href="/apps/ecommerce/product_details" class="text-reset">Bank PQR</a></h5>
+                                                                            <span class="text-muted">Bank</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 class="fs-14 my-1 fw-normal">SAR 54 mn</h5>
+                                                                    <span class="text-muted">Revenue</span>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 class="fs-14 my-1 fw-normal">74</h5>
+                                                                    <span class="text-muted">Branch</span>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 class="fs-14 my-1 fw-normal">80</h5>
+                                                                    <span class="text-muted">ATM</span>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 class="fs-14 my-1 fw-normal">9.8%<i class="ri-bar-chart-fill text-success fs-16 align-middle ms-2"></i></h5>
+                                                                    <span class="text-muted">Growth</span>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+                                                <div class="align-items-center mt-4 pt-2 justify-content-between row text-center text-sm-start">
+                                                    <div class="col-sm">
+                                                        <div class="text-muted">
+                                                            Showing <span class="fw-semibold">5</span> of <span class="fw-semibold">25</span> Results
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-auto  mt-3 mt-sm-0">
+                                                        <ul class="pagination pagination-separated pagination-sm mb-0 justify-content-center">
+                                                            <li class="page-item disabled">
+                                                                <a href="#" class="page-link">←</a>
+                                                            </li>
+                                                            <li class="page-item active">
+                                                                <a href="#" class="page-link">1</a>
+                                                            </li>
+                                                            <li class="page-item">
+                                                                <a href="#" class="page-link">2</a>
+                                                            </li>
+                                                            <li class="page-item">
+                                                                <a href="#" class="page-link">3</a>
+                                                            </li>
+                                                            <li class="page-item">
+                                                                <a href="#" class="page-link">→</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-6">
+                                        <div class="card card-height-100">
+                                            <div class="card-header align-items-center d-flex">
+                                                <h4 class="card-title mb-0 flex-grow-1">Top 5 Banks Performance Metrics FY 2022-2023</h4>
+                                                <div class="flex-shrink-0" style="display:none;">
+                                                    <div class="dropdown card-header-dropdown">
+                                                        <a class="text-reset dropdown-btn" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <span class="text-muted">Report<i class="mdi mdi-chevron-down ms-1"></i></span>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-end">
+                                                            <a class="dropdown-item" href="#">Download Report</a>
+                                                            <a class="dropdown-item" href="#">Export</a>
+                                                            <a class="dropdown-item" href="#">Import</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- end card header -->
+
+                                            <div class="card-body">
+                                                <div class="table-responsive table-card">
+                                                    <table class="table table-hover table-centered align-middle table-nowrap mb-0">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="avatar-sm bg-light rounded p-1 me-2">
+                                                                            <h1>🏙️</h1>
+                                                                        </div>
+                                                                        <div>
+                                                                            <h5 class="fs-14 my-1"><a href="/apps/ecommerce/product_details" class="text-reset">Bank ABC</a></h5>
+                                                                            <span class="text-muted">Bank</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 class="fs-14 my-1 fw-normal">SAR 29 mn</h5>
+                                                                    <span class="text-muted">Sales</span>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 class="fs-14 my-1 fw-normal">SAR 20 mn</h5>
+                                                                    <span class="text-muted">Profit</span>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 class="fs-14 my-1 fw-normal">SAR 51 bn</h5>
+                                                                    <span class="text-muted">Liquidity</span>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 class="fs-14 my-1 fw-normal">SAR 170 bn<i class="ri-bar-chart-fill text-success fs-16 align-middle ms-2"></i></h5>
+                                                                    <span class="text-muted">Assets</span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="avatar-sm bg-light rounded p-1 me-2">
+                                                                            <h1>🌆</h1>
+                                                                        </div>
+                                                                        <div>
+                                                                            <h5 class="fs-14 my-1"><a href="/apps/ecommerce/product_details" class="text-reset">Bank LKP</a></h5>
+                                                                            <span class="text-muted">Bank</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 class="fs-14 my-1 fw-normal">SAR 85.2 mn</h5>
+                                                                    <span class="text-muted">Sales</span>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 class="fs-14 my-1 fw-normal">SAR 35 mn</h5>
+                                                                    <span class="text-muted">Profit</span>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 class="fs-14 my-1 fw-normal">SAR 189 bn</h5>
+                                                                    <span class="text-muted">Liquidity</span>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 class="fs-14 my-1 fw-normal">SAR 290 bn<i class="ri-bar-chart-fill text-success fs-16 align-middle ms-2"></i></h5>
+                                                                    <span class="text-muted">Assets</span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="avatar-sm bg-light rounded p-1 me-2">
+                                                                            <h1>🏙️</h1>
+                                                                        </div>
+                                                                        <div>
+                                                                            <h5 class="fs-14 my-1"><a href="/apps/ecommerce/product_details" class="text-reset">Bank DEF</a></h5>
+                                                                            <span class="text-muted">Bank</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 class="fs-14 my-1 fw-normal">SAR 14 mn</h5>
+                                                                    <span class="text-muted">Sales</span>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 class="fs-14 my-1 fw-normal">SAR 10 mn</h5>
+                                                                    <span class="text-muted">Profit</span>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 class="fs-14 my-1 fw-normal">SAR 74 bn</h5>
+                                                                    <span class="text-muted">Liquidity</span>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 class="fs-14 my-1 fw-normal">SAR 130 bn<i class="ri-bar-chart-fill text-success fs-16 align-middle ms-2"></i></h5>
+                                                                    <span class="text-muted">Assests</span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="avatar-sm bg-light rounded p-1 me-2">
+                                                                            <h1>🏙️</h1>
+                                                                        </div>
+                                                                        <div>
+                                                                            <h5 class="fs-14 my-1"><a href="/apps/ecommerce/product_details" class="text-reset">Bank XYZ</a></h5>
+                                                                            <span class="text-muted">Bank</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 class="fs-14 my-1 fw-normal">SAR 42 mn</h5>
+                                                                    <span class="text-muted">Sales</span>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 class="fs-14 my-1 fw-normal">SAR 36 mn</h5>
+                                                                    <span class="text-muted">Profit</span>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 class="fs-14 my-1 fw-normal">SAR 84 bn</h5>
+                                                                    <span class="text-muted">Liquidity</span>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 class="fs-14 my-1 fw-normal">SAR 180 bn<i class="ri-bar-chart-fill text-success fs-16 align-middle ms-2"></i></h5>
+                                                                    <span class="text-muted">Assests</span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="avatar-sm bg-light rounded p-1 me-2">
+                                                                            <h1>🌆</h1>
+                                                                        </div>
+                                                                        <div>
+                                                                            <h5 class="fs-14 my-1"><a href="/apps/ecommerce/product_details" class="text-reset">Bank PQR</a></h5>
+                                                                            <span class="text-muted">Bank</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 class="fs-14 my-1 fw-normal">SAR 54 mn</h5>
+                                                                    <span class="text-muted">Sales</span>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 class="fs-14 my-1 fw-normal">SAR 44 mn</h5>
+                                                                    <span class="text-muted">Profit</span>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 class="fs-14 my-1 fw-normal">SAR 80 bn</h5>
+                                                                    <span class="text-muted">Liquidity</span>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 class="fs-14 my-1 fw-normal">SAR 198 bn<i class="ri-bar-chart-fill text-success fs-16 align-middle ms-2"></i></h5>
+                                                                    <span class="text-muted">Assests</span>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+                                                <div class="align-items-center mt-4 pt-2 justify-content-between row text-center text-sm-start">
+                                                    <div class="col-sm">
+                                                        <div class="text-muted">
+                                                            Showing <span class="fw-semibold">5</span> of <span class="fw-semibold">25</span> Results
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-auto  mt-3 mt-sm-0">
+                                                        <ul class="pagination pagination-separated pagination-sm mb-0 justify-content-center">
+                                                            <li class="page-item disabled">
+                                                                <a href="#" class="page-link">←</a>
+                                                            </li>
+                                                            <li class="page-item active">
+                                                                <a href="#" class="page-link">1</a>
+                                                            </li>
+                                                            <li class="page-item">
+                                                                <a href="#" class="page-link">2</a>
+                                                            </li>
+                                                            <li class="page-item">
+                                                                <a href="#" class="page-link">3</a>
+                                                            </li>
+                                                            <li class="page-item">
+                                                                <a href="#" class="page-link">→</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+
+                                            </div> <!-- .card-body-->
+                                        </div> <!-- .card-->
+                                    </div> <!-- .col-->
+                                </div> <!-- end row-->
+                                
+                                <div class="row" style="display:none;">
+                                    <div class="col-xl-4">
+                                        <div class="card card-height-100">
+                                            <div class="card-header align-items-center d-flex">
+                                                <h4 class="card-title mb-0 flex-grow-1">Top 5 Banks Presence</h4>
+                                                <div class="flex-shrink-0">
+                                                    <div class="dropdown card-header-dropdown">
+                                                        <a class="text-reset dropdown-btn" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <span class="text-muted">Report<i class="mdi mdi-chevron-down ms-1"></i></span>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-end">
+                                                            <a class="dropdown-item" href="#">Download Report</a>
+                                                            <a class="dropdown-item" href="#">Export</a>
+                                                            <a class="dropdown-item" href="#">Import</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- end card header -->
+
+                                            <div class="card-body">
+                                                <div id="store-visits-source" data-colors='["--vz-primary", "--vz-success", "--vz-warning", "--vz-danger", "--vz-info"]' class="apex-charts" dir="ltr"></div>
+                                            </div>
+                                        </div> <!-- .card-->
+                                    </div> <!-- .col-->
+
+                                    <div class="col-xl-8">
+                                        <div class="card">
+                                            <div class="card-header align-items-center d-flex">
+                                                <h4 class="card-title mb-0 flex-grow-1">Recent Orders</h4>
+                                                <div class="flex-shrink-0">
+                                                    <button type="button" class="btn btn-soft-info btn-sm">
+                                                        <i class="ri-file-list-3-line align-middle"></i> Generate Report
+                                                    </button>
+                                                </div>
+                                            </div><!-- end card header -->
+
+                                            <div class="card-body">
+                                                <div class="table-responsive table-card">
+                                                    <table class="table table-borderless table-centered align-middle table-nowrap mb-0">
+                                                        <thead class="text-muted table-light">
+                                                            <tr>
+                                                                <th scope="col">Order ID</th>
+                                                                <th scope="col">Customer</th>
+                                                                <th scope="col">Product</th>
+                                                                <th scope="col">Amount</th>
+                                                                <th scope="col">Vendor</th>
+                                                                <th scope="col">Status</th>
+                                                                <th scope="col">Rating</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <a href="/apps/ecommerce/order_details" class="fw-medium link-primary">#VZ2112</a>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="flex-shrink-0 me-2">
+                                                                            <img src="{{url_for('static' ,filename='images/users/avatar-1.jpg')}}" alt="" class="avatar-xs rounded-circle" />
+                                                                        </div>
+                                                                        <div class="flex-grow-1">Alex Smith</div>
+                                                                    </div>
+                                                                </td>
+                                                                <td>Clothes</td>
+                                                                <td>
+                                                                    <span class="text-success">SAR109.00</span>
+                                                                </td>
+                                                                <td>Zoetic Fashion</td>
+                                                                <td>
+                                                                    <span class="badge badge-soft-success">Paid</span>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 class="fs-14 fw-medium mb-0">5.0<span class="text-muted fs-11 ms-1">(61 votes)</span></h5>
+                                                                </td>
+                                                            </tr><!-- end tr -->
+                                                            <tr>
+                                                                <td>
+                                                                    <a href="/apps/ecommerce/order_details" class="fw-medium link-primary">#VZ2111</a>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="flex-shrink-0 me-2">
+                                                                            <img src="{{url_for('static' ,filename='images/users/avatar-2.jpg')}}" alt="" class="avatar-xs rounded-circle" />
+                                                                        </div>
+                                                                        <div class="flex-grow-1">Jansh Brown</div>
+                                                                    </div>
+                                                                </td>
+                                                                <td>Kitchen Storage</td>
+                                                                <td>
+                                                                    <span class="text-success">SAR149.00</span>
+                                                                </td>
+                                                                <td>Micro Design</td>
+                                                                <td>
+                                                                    <span class="badge badge-soft-warning">Pending</span>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 class="fs-14 fw-medium mb-0">4.5<span class="text-muted fs-11 ms-1">(61 votes)</span></h5>
+                                                                </td>
+                                                            </tr><!-- end tr -->
+                                                            <tr>
+                                                                <td>
+                                                                    <a href="/apps/ecommerce/order_details" class="fw-medium link-primary">#VZ2109</a>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="flex-shrink-0 me-2">
+                                                                            <img src="{{url_for('static' ,filename='images/users/avatar-3.jpg')}}" alt="" class="avatar-xs rounded-circle" />
+                                                                        </div>
+                                                                        <div class="flex-grow-1">Ayaan Bowen</div>
+                                                                    </div>
+                                                                </td>
+                                                                <td>Bike Accessories</td>
+                                                                <td>
+                                                                    <span class="text-success">SAR215.00</span>
+                                                                </td>
+                                                                <td>Nesta Technologies</td>
+                                                                <td>
+                                                                    <span class="badge badge-soft-success">Paid</span>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 class="fs-14 fw-medium mb-0">4.9<span class="text-muted fs-11 ms-1">(89 votes)</span></h5>
+                                                                </td>
+                                                            </tr><!-- end tr -->
+                                                            <tr>
+                                                                <td>
+                                                                    <a href="/apps/ecommerce/order_details" class="fw-medium link-primary">#VZ2108</a>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="flex-shrink-0 me-2">
+                                                                            <img src="{{url_for('static' ,filename='images/users/avatar-4.jpg')}}" alt="" class="avatar-xs rounded-circle" />
+                                                                        </div>
+                                                                        <div class="flex-grow-1">Prezy Mark</div>
+                                                                    </div>
+                                                                </td>
+                                                                <td>Furniture</td>
+                                                                <td>
+                                                                    <span class="text-success">SAR199.00</span>
+                                                                </td>
+                                                                <td>Syntyce Solutions</td>
+                                                                <td>
+                                                                    <span class="badge badge-soft-danger">Unpaid</span>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 class="fs-14 fw-medium mb-0">4.3<span class="text-muted fs-11 ms-1">(47 votes)</span></h5>
+                                                                </td>
+                                                            </tr><!-- end tr -->
+                                                            <tr>
+                                                                <td>
+                                                                    <a href="/apps/ecommerce/order_details" class="fw-medium link-primary">#VZ2107</a>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="flex-shrink-0 me-2">
+                                                                            <img src="{{url_for('static' ,filename='images/users/avatar-6.jpg')}}" alt="" class="avatar-xs rounded-circle" />
+                                                                        </div>
+                                                                        <div class="flex-grow-1">Vihan Hudda</div>
+                                                                    </div>
+                                                                </td>
+                                                                <td>Bags and Wallets</td>
+                                                                <td>
+                                                                    <span class="text-success">SAR330.00</span>
+                                                                </td>
+                                                                <td>iTest Factory</td>
+                                                                <td>
+                                                                    <span class="badge badge-soft-success">Paid</span>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 class="fs-14 fw-medium mb-0">4.7<span class="text-muted fs-11 ms-1">(161 votes)</span></h5>
+                                                                </td>
+                                                            </tr><!-- end tr -->
+                                                        </tbody><!-- end tbody -->
+                                                    </table><!-- end table -->
+                                                </div>
+                                            </div>
+                                        </div> <!-- .card-->
+                                    </div> <!-- .col-->
+                                </div> <!-- end row-->
+
+                            </div> <!-- end .h-100-->
+
+                        </div> <!-- end col -->
+
+                        <div class="col-auto layout-rightside-col" style="display:none;">
+                            <div class="overlay"></div>
+                            <div class="layout-rightside">
+                                <div class="card h-100 rounded-0">
+                                    <div class="card-body p-0">
+                                        <div class="p-3">
+                                            <h6 class="text-muted mb-0 text-uppercase fw-semibold">SmartGEO Activity</h6>
+                                        </div>
+                                        <div data-simplebar style="max-height: 410px;" class="p-3 pt-0">
+                                            <div class="acitivity-timeline acitivity-main">
+                                                <div class="acitivity-item d-flex">
+                                                    <div class="flex-shrink-0 avatar-xs acitivity-avatar">
+                                                        <div class="avatar-title bg-soft-success text-success rounded-circle">
+                                                            <i class="ri-shopping-cart-2-line"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-grow-1 ms-3">
+                                                        <h6 class="mb-1 lh-base">Recommendation For Bank ABC</h6>
+                                                        <p class="text-muted mb-1">ATM recommended near Jeddah Port</p>
+                                                        <small class="mb-0 text-muted">02:14 PM Today</small>
+                                                    </div>
+                                                </div>
+                                                <div class="acitivity-item py-3 d-flex">
+                                                    <div class="flex-shrink-0 avatar-xs acitivity-avatar">
+                                                        <div class="avatar-title bg-soft-danger text-danger rounded-circle">
+                                                            <i class="ri-stack-fill"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-grow-1 ms-3">
+                                                        <h6 class="mb-1 lh-base">Upgraded new <span class="fw-semibold">Recommendation Engine</span></h6>
+                                                        <p class="text-muted mb-1">By Deloitte</p>
+                                                        <div class="d-inline-flex gap-2 border border-dashed p-2 mb-2" style="display:none;">
+                                                            <a style="display:none;" href="/apps/ecommerce/product_details" class="bg-light rounded p-1">
+                                                                <img src="{{url_for('static' ,filename='images/products/img-8.png')}}" alt="" class="img-fluid d-block" />
+                                                            </a>
+                                                            <a style="display:none;" href="/apps/ecommerce/product_details" class="bg-light rounded p-1">
+                                                                <img src="{{url_for('static' ,filename='images/products/img-2.png')}}" alt="" class="img-fluid d-block" />
+                                                            </a>
+                                                            <a style="display:none;" href="/apps/ecommerce/product_details" class="bg-light rounded p-1">
+                                                                <img src="{{url_for('static' ,filename='images/products/img-10.png')}}" alt="" class="img-fluid d-block" />
+                                                            </a>
+                                                        </div>
+                                                        <p class="mb-0 text-muted"><small>9:47 PM Yesterday</small></p>
+                                                    </div>
+                                                </div>
+                                                <div class="acitivity-item py-3 d-flex" style="display:none;">
+                                                    <div class="flex-shrink-0">
+                                                        <img src="{{url_for('static' ,filename='images/users/avatar-2.jpg')}}" alt="" class="avatar-xs rounded-circle acitivity-avatar">
+                                                    </div>
+                                                    <div class="flex-grow-1 ms-3">
+                                                        <h6 class="mb-1 lh-base">Natasha Carey onboarded as newest SmartGEO lead</h6>
+                                                        <small class="mb-0 text-muted">25 Apr, 2023</small>
+                                                    </div>
+                                                </div>
+                                                <div class="acitivity-item py-3 d-flex" style="display:none;">
+                                                    <div class="flex-shrink-0">
+                                                        <div class="avatar-xs acitivity-avatar">
+                                                            <div class="avatar-title rounded-circle bg-secondary">
+                                                                <i class="mdi mdi-sale fs-14"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-grow-1 ms-3" >
+                                                        <h6 class="mb-1 lh-base">Today offers by <a href="/apps/ecommerce/seller_details" class="link-secondary">Bank LKP</a></h6>
+                                                        <p class="text-muted mb-2">SAR 500 cashback on selected purchases only.</p>
+                                                        <small class="mb-0 text-muted">12 Apr, 2023</small>
+                                                    </div>
+                                                </div>
+                                                <div class="acitivity-item py-3 d-flex" style="display:none;">
+                                                    <div class="flex-shrink-0">
+                                                        <div class="avatar-xs acitivity-avatar">
+                                                            <div class="avatar-title rounded-circle bg-soft-danger text-danger">
+                                                                <i class="ri-bookmark-fill"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-grow-1 ms-3" style="display:none;">
+                                                        <h6 class="mb-1 lh-base">Favoried Product</h6>
+                                                        <p class="text-muted mb-2">Esther James have favorited product.</p>
+                                                        <small class="mb-0 text-muted">25 Nov, 2021</small>
+                                                    </div>
+                                                </div>
+                                                <div class="acitivity-item py-3 d-flex" style="display:none;">
+                                                    <div class="flex-shrink-0">
+                                                        <div class="avatar-xs acitivity-avatar">
+                                                            <div class="avatar-title rounded-circle bg-secondary">
+                                                                <i class="mdi mdi-sale fs-14"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-grow-1 ms-3" style="display:none;">
+                                                        <h6 class="mb-1 lh-base">Flash sale starting <span class="text-primary">Tomorrow.</span></h6>
+                                                        <p class="text-muted mb-0">Flash sale by <a href="javascript:void(0);" class="link-secondary fw-medium">Zoetic Fashion</a></p>
+                                                        <small class="mb-0 text-muted">22 Oct, 2021</small>
+                                                    </div>
+                                                </div>
+                                                <div class="acitivity-item py-3 d-flex" style="display:none;">
+                                                    <div class="flex-shrink-0">
+                                                        <div class="avatar-xs acitivity-avatar">
+                                                            <div class="avatar-title rounded-circle bg-soft-info text-info">
+                                                                <i class="ri-line-chart-line"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-grow-1 ms-3" style="display:none;">
+                                                        <h6 class="mb-1 lh-base">Monthly sales report</h6>
+                                                        <p class="text-muted mb-2"><span class="text-danger">2 days left</span> notification to submit the monthly sales report. <a href="javascript:void(0);" class="link-warning text-decoration-underline">Reports Builder</a></p>
+                                                        <small class="mb-0 text-muted">15 Oct</small>
+                                                    </div>
+                                                </div>
+                                                <div class="acitivity-item d-flex">
+                                                    <div class="flex-shrink-0">
+                                                        <img src="{{url_for('static' ,filename='images/users/avatar-3.jpg')}}" alt="" class="avatar-xs rounded-circle acitivity-avatar" />
+                                                    </div>
+                                                    <div class="flex-grow-1 ms-3">
+                                                        <h6 class="mb-1 lh-base">Frank Hook Commented</h6>
+                                                        <p class="text-muted mb-2 fst-italic">" A product that has reviews is more likable to be sold than a product. "</p>
+                                                        <small class="mb-0 text-muted">26 Aug, 2021</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="p-3 mt-2" style="display:none;">
+                                            <h6 class="text-muted mb-3 text-uppercase fw-semibold">Top 10 Categories
+                                            </h6>
+
+                                            <ol class="ps-3 text-muted">
+                                                <li class="py-1">
+                                                    <a href="#" class="text-muted">Mobile & Accessories <span class="float-end">(10,294)</span></a>
+                                                </li>
+                                                <li class="py-1">
+                                                    <a href="#" class="text-muted">Desktop <span class="float-end">(6,256)</span></a>
+                                                </li>
+                                                <li class="py-1">
+                                                    <a href="#" class="text-muted">Electronics <span class="float-end">(3,479)</span></a>
+                                                </li>
+                                                <li class="py-1">
+                                                    <a href="#" class="text-muted">Home & Furniture <span class="float-end">(2,275)</span></a>
+                                                </li>
+                                                <li class="py-1">
+                                                    <a href="#" class="text-muted">Grocery <span class="float-end">(1,950)</span></a>
+                                                </li>
+                                                <li class="py-1">
+                                                    <a href="#" class="text-muted">Fashion <span class="float-end">(1,582)</span></a>
+                                                </li>
+                                                <li class="py-1">
+                                                    <a href="#" class="text-muted">Appliances <span class="float-end">(1,037)</span></a>
+                                                </li>
+                                                <li class="py-1">
+                                                    <a href="#" class="text-muted">Beauty, Toys & More <span class="float-end">(924)</span></a>
+                                                </li>
+                                                <li class="py-1">
+                                                    <a href="#" class="text-muted">Food & Drinks <span class="float-end">(701)</span></a>
+                                                </li>
+                                                <li class="py-1">
+                                                    <a href="#" class="text-muted">Toys & Games <span class="float-end">(239)</span></a>
+                                                </li>
+                                            </ol>
+                                            <div class="mt-3 text-center" style="display:none;">
+                                                <a href="javascript:void(0);" class="text-muted text-decoration-underline">View all Categories</a>
+                                            </div>
+                                        </div>
+                                        <div class="p-3" style="display:none;">
+                                            <h6 class="text-muted mb-3 text-uppercase fw-semibold">Products Reviews</h6>
+                                            <!-- Swiper -->
+                                            <div class="swiper vertical-swiper" style="height: 250px;">
+                                                <div class="swiper-wrapper">
+                                                    <div class="swiper-slide">
+                                                        <div class="card border border-dashed shadow-none">
+                                                            <div class="card-body">
+                                                                <div class="d-flex">
+                                                                    <div class="flex-shrink-0 avatar-sm">
+                                                                        <div class="avatar-title bg-light rounded">
+                                                                            <img src="{{url_for('static' ,filename='images/companies/img-1.png')}}" alt="" height="30">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="flex-grow-1 ms-3">
+                                                                        <div>
+                                                                            <p class="text-muted mb-1 fst-italic text-truncate-two-lines"> " Great product and looks great, lots of features. "</p>
+                                                                            <div
+                                                                                class="fs-11 align-middle text-warning">
+                                                                                <i class="ri-star-fill"></i>
+                                                                                <i class="ri-star-fill"></i>
+                                                                                <i class="ri-star-fill"></i>
+                                                                                <i class="ri-star-fill"></i>
+                                                                                <i class="ri-star-fill"></i>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="text-end mb-0 text-muted">
+                                                                            - by <cite title="Source Title">Force Medicines</cite>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="swiper-slide">
+                                                        <div class="card border border-dashed shadow-none">
+                                                            <div class="card-body">
+                                                                <div class="d-flex">
+                                                                    <div class="flex-shrink-0">
+                                                                        <img src="{{url_for('static' ,filename='images/users/avatar-3.jpg')}}" alt="" class="avatar-sm rounded">
+                                                                    </div>
+                                                                    <div class="flex-grow-1 ms-3">
+                                                                        <div>
+                                                                            <p class="text-muted mb-1 fst-italic text-truncate-two-lines"> " Amazing template, very easy to understand and manipulate. "</p>
+                                                                            <div class="fs-11 align-middle text-warning">
+                                                                                <i class="ri-star-fill"></i>
+                                                                                <i class="ri-star-fill"></i>
+                                                                                <i class="ri-star-fill"></i>
+                                                                                <i class="ri-star-fill"></i>
+                                                                                <i class="ri-star-half-fill"></i>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="text-end mb-0 text-muted">
+                                                                            - by <cite title="Source Title">Henry Baird</cite>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="swiper-slide">
+                                                        <div class="card border border-dashed shadow-none">
+                                                            <div class="card-body">
+                                                                <div class="d-flex">
+                                                                    <div class="flex-shrink-0 avatar-sm">
+                                                                        <div class="avatar-title bg-light rounded">
+                                                                            <img src="{{url_for('static' ,filename='images/companies/img-8.png')}}" alt="" height="30">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="flex-grow-1 ms-3">
+                                                                        <div>
+                                                                            <p class="text-muted mb-1 fst-italic text-truncate-two-lines"> "Very beautiful product and Very helpful customer service."</p>
+                                                                            <div class="fs-11 align-middle text-warning">
+                                                                                <i class="ri-star-fill"></i>
+                                                                                <i class="ri-star-fill"></i>
+                                                                                <i class="ri-star-fill"></i>
+                                                                                <i class="ri-star-line"></i>
+                                                                                <i class="ri-star-line"></i>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="text-end mb-0 text-muted">
+                                                                            - by <cite title="Source Title">Zoetic Fashion</cite>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="swiper-slide">
+                                                        <div class="card border border-dashed shadow-none">
+                                                            <div class="card-body">
+                                                                <div class="d-flex">
+                                                                    <div class="flex-shrink-0">
+                                                                        <img src="{{url_for('static' ,filename='images/users/avatar-2.jpg')}}" alt="" class="avatar-sm rounded">
+                                                                    </div>
+                                                                    <div class="flex-grow-1 ms-3">
+                                                                        <div>
+                                                                            <p class="text-muted mb-1 fst-italic text-truncate-two-lines">" The product is very beautiful. I like it. "</p>
+                                                                            <div class="fs-11 align-middle text-warning">
+                                                                                <i class="ri-star-fill"></i>
+                                                                                <i class="ri-star-fill"></i>
+                                                                                <i class="ri-star-fill"></i>
+                                                                                <i class="ri-star-half-fill"></i>
+                                                                                <i class="ri-star-line"></i>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="text-end mb-0 text-muted">
+                                                                            - by <cite title="Source Title">Nancy Martino</cite>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="p-3">
+                                            <h6 class="text-muted mb-3 text-uppercase fw-semibold">Customer Reviews</h6>
+                                            <div class="bg-light px-3 py-2 rounded-2 mb-2">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-grow-1">
+                                                        <div class="fs-16 align-middle text-warning">
+                                                            <i class="ri-star-fill"></i>
+                                                            <i class="ri-star-fill"></i>
+                                                            <i class="ri-star-fill"></i>
+                                                            <i class="ri-star-fill"></i>
+                                                            <i class="ri-star-half-fill"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-shrink-0">
+                                                        <h6 class="mb-0">4.5 out of 5</h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="text-center">
+                                                <div class="text-muted">Total <span class="fw-medium">5.50k</span> reviews</div>
+                                            </div>
+
+                                            <div class="mt-3">
+                                                <div class="row align-items-center g-2">
+                                                    <div class="col-auto">
+                                                        <div class="p-1">
+                                                            <h6 class="mb-0">5 star</h6>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="p-1">
+                                                            <div class="progress animated-progress progress-sm">
+                                                                <div class="progress-bar bg-success" role="progressbar" style="width: 50.16%" aria-valuenow="50.16" aria-valuemin="0" aria-valuemax="100"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <div class="p-1">
+                                                            <h6 class="mb-0 text-muted">2758</h6>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- end row -->
+
+                                                <div class="row align-items-center g-2">
+                                                    <div class="col-auto">
+                                                        <div class="p-1">
+                                                            <h6 class="mb-0">4 star</h6>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="p-1">
+                                                            <div class="progress animated-progress progress-sm">
+                                                                <div class="progress-bar bg-success" role="progressbar" style="width: 29.32%" aria-valuenow="29.32" aria-valuemin="0" aria-valuemax="100"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <div class="p-1">
+                                                            <h6 class="mb-0 text-muted">1063</h6>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- end row -->
+
+                                                <div class="row align-items-center g-2">
+                                                    <div class="col-auto">
+                                                        <div class="p-1">
+                                                            <h6 class="mb-0">3 star</h6>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="p-1">
+                                                            <div class="progress animated-progress progress-sm">
+                                                                <div class="progress-bar bg-warning" role="progressbar" style="width: 18.12%" aria-valuenow="18.12" aria-valuemin="0" aria-valuemax="100"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <div class="p-1">
+                                                            <h6 class="mb-0 text-muted">997</h6>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- end row -->
+
+                                                <div class="row align-items-center g-2">
+                                                    <div class="col-auto">
+                                                        <div class="p-1">
+                                                            <h6 class="mb-0">2 star</h6>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="p-1">
+                                                            <div class="progress animated-progress progress-sm">
+                                                                <div class="progress-bar bg-success" role="progressbar" style="width: 4.98%" aria-valuenow="4.98" aria-valuemin="0" aria-valuemax="100"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-auto">
+                                                        <div class="p-1">
+                                                            <h6 class="mb-0 text-muted">227</h6>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- end row -->
+
+                                                <div class="row align-items-center g-2">
+                                                    <div class="col-auto">
+                                                        <div class="p-1">
+                                                            <h6 class="mb-0">1 star</h6>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="p-1">
+                                                            <div class="progress animated-progress progress-sm">
+                                                                <div class="progress-bar bg-danger" role="progressbar" style="width: 7.42%" aria-valuenow="7.42" aria-valuemin="0" aria-valuemax="100"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <div class="p-1">
+                                                            <h6 class="mb-0 text-muted">408</h6>
+                                                        </div>
+                                                    </div>
+                                                </div><!-- end row -->
+                                            </div>
+                                        </div>
+
+                                        <div class="card sidebar-alert bg-light border-0 text-center mx-4 mb-0 mt-3">
+                                            <div class="card-body">
+                                                <img src="{{url_for('static' ,filename='images/giftbox.png')}}" alt="">
+                                                <div class="mt-4">
+                                                    <h5>Invite New Seller</h5>
+                                                    <p class="text-muted lh-base">Refer a new seller to us and earn $100 per refer.</p>
+                                                    <button type="button" class="btn btn-primary btn-label rounded-pill"><i class="ri-mail-fill label-icon align-middle rounded-pill fs-16 me-2"></i> Invite Now</button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div> <!-- end card-->
+                            </div> <!-- end .rightbar-->
+
+                        </div> <!-- end col -->
+                    </div>
+
+                </div>
+                <!-- container-fluid -->
+            </div>
+            <!-- End Page-content -->
+            {% block footer %}
+            {% include "partials/footer.html" %}
+            {% endblock footer %}
+        </div>
+        <!-- end main content-->
+{% endblock content %}
+
+{% block extra_js %}
+<!-- nouisliderribute js -->
+<script src="{{url_for('static' ,filename='libs/nouislider/dist/nouislider.min.js')}}"></script>
+<script src="{{url_for('static' ,filename='libs/wnumb/wNumb.min.js')}}"></script>
+<!-- apexcharts -->
+<script src="{{url_for('static' ,filename='libs/apexcharts/dist/apexcharts.min.js')}}"></script>
+    <!-- echarts js -->
+<script src="{{url_for('static' ,filename='libs/echarts/dist/echarts.min.js')}}"></script>
+
+    <!-- echarts init -->
+<script src="{{url_for('static' ,filename='js/pages/echarts.init.js')}}"></script> 
+<!-- Vector map-->
+<script src="{{url_for('static' ,filename='libs/jsvectormap/dist/js/jsvectormap.min.js')}}"></script>
+<script src="{{url_for('static' ,filename='libs/jsvectormap/dist/maps/world-merc.js')}}"></script>
+
+<!--Swiper slider js-->
+<script src="{{url_for('static' ,filename='libs/swiper/swiper-bundle.min.js')}}"></script>
+
+<!-- Dashboard init -->
+<script src="{{url_for('static' ,filename='js/pages/dashboard-ecommerce.init.js')}}"></script>
+<script src="{{url_for('static' ,filename='libs/prismjs/prism.js')}}"></script>
+<!-- leaflet plugin -->
+<script src="{{url_for('static' ,filename='libs/leaflet/dist/leaflet.js')}}"></script>
+
+<!-- leaflet map.init -->
+<script src="{{url_for('static' ,filename='js/pages/leaflet-us-states.js')}}"></script>
+<script src="{{url_for('static' ,filename='js/pages/leaflet-heat.js')}}"></script>
+<script>
+    /*
+Template Name: Velzon - Admin & Dashboard Template
+Author: Themesbrand
+Website: https://Themesbrand.com/
+Contact: Themesbrand@gmail.com
+File: Leaflet init js
+*/
+
+// leaflet-map
+// var mymap = L.map('leaflet-map').setView([51.505, -0.09], 13);
+
+// L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoidWRhcyIsImEiOiJjbGhhcDRod2IwZWoyM2VwYzAzdXRqYWczIn0.f2kFlTNpIUc_6YNliuIVpQ', {
+//     maxZoom: 18,
+//     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+//         '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+//         'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+//     id: 'mapbox/streets-v11',
+//     tileSize: 512,
+//     zoomOffset: -1
+// }).addTo(mymap);
+let data1 = {{recos|safe}};
+let entity = {{entity|safe}};
+let facility = {{facility|safe}};
+let offices = {{offices|safe}};
+let residential = {{residential|safe}};
+let entity_details = {{entity_details|safe}};
+let customer_branchmap = {{customer_branchmap|safe}};
+let area = [];
+let city = [];
+let type = [];
+for (let i = 0; i < data1.length; i++) {
+    if (area.includes(data1[i][2])==false){
+        area.push(data1[i][2]);
+    }
+    if (city.includes(data1[i][1])==false){
+        city.push(data1[i][1]);
+    }
+    if (type.includes(data1[i][3])==false){
+        type.push(data1[i][3]);
+    }
+}
+//console.log(area);
+//console.log(city);
+//console.log(type);
+var areaselect = document.getElementById('area');
+var cityselect = document.getElementById('city');
+var typeselect = document.getElementById('type');
+for (var i = 0; i<area.length; i++){
+    var opt = document.createElement('option');
+    opt.value = area[i];
+    opt.innerHTML = area[i];
+    areaselect.appendChild(opt);
+}
+for (var i = 0; i<city.length; i++){
+    var opt = document.createElement('option');
+    opt.value = city[i];
+    opt.innerHTML = city[i];
+    cityselect.appendChild(opt);
+}
+for (var i = 0; i<type.length; i++){
+    var opt = document.createElement('option');
+    opt.value = type[i];
+    opt.innerHTML = type[i];
+    typeselect.appendChild(opt);
+}
+
+//}
+function clearmap(){
+markermap.off();
+markermap.remove();
+markermap = L.map('leaflet-map-marker').setView([24.7926729,46.5841152], 10);
+L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoidWRhcyIsImEiOiJjbGhhcDRod2IwZWoyM2VwYzAzdXRqYWczIn0.f2kFlTNpIUc_6YNliuIVpQ', {
+    maxZoom: 18,
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+        '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+        'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    id: 'mapbox/streets-v11',
+    tileSize: 512,
+    zoomOffset: -1
+}).addTo(markermap);
+  // Event listener for the map click event
+markermap.on('click', function (event) {
+    // Call the function to remove heat layers
+    removeHeatLayers();
+  });
+showlegend();
+}
+// leaflet-map-marker
+var markermap = L.map('leaflet-map-marker').setView([24.7926729,46.5841152], 10);
+
+L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoidWRhcyIsImEiOiJjbGhhcDRod2IwZWoyM2VwYzAzdXRqYWczIn0.f2kFlTNpIUc_6YNliuIVpQ', {
+    maxZoom: 18,
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+        '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+        'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    id: 'mapbox/streets-v11',
+    tileSize: 512,
+    zoomOffset: -1
+}).addTo(markermap);
+var flag = 1;
+// Function to remove heat layers from the map
+function removeHeatLayers() {
+    markermap.eachLayer(function (layer) {
+      // Check if the layer is a heat layer
+      if (layer instanceof L.HeatLayer ||  layer instanceof L.Polygon) {
+        // Remove the heat layer from the map
+        markermap.removeLayer(layer);
+      }
+    });
+  }
+function removeMarkers() {
+    markermap.eachLayer(function (layer) {
+      // Check if the layer is a heat layer
+      if (layer instanceof L.Marker) {
+        // Remove the heat layer from the map
+        markermap.removeLayer(layer);
+      }
+    });
+  }
+  
+  // Event listener for the map click event
+  markermap.on('click', function (event) {
+    // Call the function to remove heat layers
+    removeHeatLayers();
+  });
+  
+function showlegend(){
+//Add map legend
+var legend = L.control({ position: "bottomleft" });
+
+legend.onAdd = function(map) {
+  var div = L.DomUtil.create("div", "legend");
+  div.innerHTML += "<h6 id='B'><strong>BANK ABC</strong></h6>";
+  div.innerHTML += '<i style="background: #448D40"></i><span id="B2">🟦Preferred Banking</span><br>';
+  div.innerHTML += '<i style="background: #477AC2"></i><span id="B1">🟧Corporate Banking</span><br>';
+  div.innerHTML += '<i style="background: #E6E696"></i><span id="B3">🟩Regular Banking</span><br>';
+  return div;
+};
+
+legend.addTo(markermap);
+
+document.getElementById('B').style.color="black";
+document.getElementById('B1').style.color="black";
+document.getElementById('B2').style.color="black";
+document.getElementById('B3').style.color="black";
+
+}
+showlegend();
+//function updatemap()
+//{
+//clearmap();
+//let area = document.getElementById("area").value;
+//let type = document.getElementById("type").value;
+//let city = document.getElementById("city").value;
+//console.log(area,type,city);
+
+/**for (let i = 0; i < data1.length; i++) { // iteration over input
+    //if (data[i][1]==city && data[i][2]==area && data[i][3]==type){
+        let rid = data1[i][4];
+        val = data1[i][5]
+        if (val.includes(",")) {
+            val = val.split(",");
+        }
+        else {
+            val = val.split(" ")
+        }
+        let latlong = [parseFloat(val[0].trim()),parseFloat(val[1].trim())];
+        //console.log(latlong)
+        //markermap.panTo(latlong);
+        L.marker(latlong).on('click', markerOnClick1).addTo(markermap).bindTooltip(rid+":"+data1[i][2]);
+    //}
+}*/
+
+for (let i = 0; i < entity.length; i++) { // show all banks
+    val = entity[i][9];
+    let bank_name = entity[i][3];
+    if (val.includes(",")) {
+        val = val.split(",");
+    }
+    else {
+        val = val.split(" ")
+    }
+    let latlong = [parseFloat(val[0].trim()),parseFloat(val[1].trim())];
+    val = entity[i][5];
+    if (bank_name == "Bank ABC") {
+    if (val == "Regular Banking") {
+        var a = L.marker(latlong).on('click', markerOnClick2).addTo(markermap).bindTooltip(entity[i][4]+":"+entity[i][3]);
+        a._icon.classList.add("a");
+    }
+    if (val == "Corporate Banking") {
+        var b = L.marker(latlong).on('click', markerOnClick2).addTo(markermap).bindTooltip(entity[i][4]+":"+entity[i][3]);
+        b._icon.classList.add("b");
+    }
+    if (val == "Preferred Banking") {
+        var c = L.marker(latlong).on('click', markerOnClick2).addTo(markermap).bindTooltip(entity[i][4]+":"+entity[i][3]);
+
+    }
+    }
+    else {
+        var d = L.marker(latlong).on('click').addTo(markermap).bindTooltip(entity[i][4]+":"+entity[i][3]);
+        d._icon.classList.add("d");
+    } 
+}
+
+function filterCust(){
+    document.getElementById('val5').innerHTML = document.getElementById('customers').value;
+    removeMarkers();
+    for (let i = 0; i < entity.length; i++) { // show all banks
+        if (entity[i][3]=="Bank ABC"){
+        let bid = entity[i][4];
+        for (let j = 0; j < entity_details.length; j++) { // iteration over input
+            if (entity_details[j][0]==bid && entity_details[j][2]=="Apr" && entity_details[j][3]<=(parseInt(document.getElementById('customers').value)*1000) && entity_details[j][4]<=(parseInt(document.getElementById('transactions').value)*1000000) && entity_details[j][6]<=parseInt(document.getElementById('efficiency').value) && entity_details[j][5]<=parseInt(document.getElementById('nps').value) && entity_details[j][7]<=(parseInt(document.getElementById('revenue').value)*1000000)){
+                let val = entity[i][9]
+                if (val.includes(",")) {
+                    val = val.split(",");
+                }
+                else {
+                    val = val.split(" ")
+                }
+                let latlong = [parseFloat(val[0].trim()),parseFloat(val[1].trim())];
+                val = entity[i][5];
+                if (val == "Regular Banking") {
+                    var a = L.marker(latlong).on('click', markerOnClick2).addTo(markermap).bindTooltip(entity[i][4]+":"+entity[i][3]);
+                    a._icon.classList.add("a");
+                }
+                if (val == "Corporate Banking") {
+                    var b = L.marker(latlong).on('click', markerOnClick2).addTo(markermap).bindTooltip(entity[i][4]+":"+entity[i][3]);
+                    b._icon.classList.add("b");
+                }
+                if (val == "Preferred Banking") {
+                    var c = L.marker(latlong).on('click', markerOnClick2).addTo(markermap).bindTooltip(entity[i][4]+":"+entity[i][3]);
+            
+                }
+                }
+        }
+        }
+    }
+}
+function filterTrnx(){
+    document.getElementById('val1').innerHTML = document.getElementById('transactions').value;
+    removeMarkers();
+    for (let i = 0; i < entity.length; i++) { // show all banks
+        if (entity[i][3]=="Bank ABC"){
+        let bid = entity[i][4];
+        for (let j = 0; j < entity_details.length; j++) { // iteration over input
+            if (entity_details[j][0]==bid && entity_details[j][2]=="Apr" && entity_details[j][3]<=(parseInt(document.getElementById('customers').value)*1000) && entity_details[j][4]<=(parseInt(document.getElementById('transactions').value)*1000000) && entity_details[j][6]<=parseInt(document.getElementById('efficiency').value) && entity_details[j][5]<=parseInt(document.getElementById('nps').value) && entity_details[j][7]<=(parseInt(document.getElementById('revenue').value)*1000000)){
+                let val = entity[i][9]
+                if (val.includes(",")) {
+                    val = val.split(",");
+                }
+                else {
+                    val = val.split(" ")
+                }
+                let latlong = [parseFloat(val[0].trim()),parseFloat(val[1].trim())];
+                val = entity[i][5];
+                if (val == "Regular Banking") {
+                    var a = L.marker(latlong).on('click', markerOnClick2).addTo(markermap).bindTooltip(entity[i][4]+":"+entity[i][3]);
+                    a._icon.classList.add("a");
+                }
+                if (val == "Corporate Banking") {
+                    var b = L.marker(latlong).on('click', markerOnClick2).addTo(markermap).bindTooltip(entity[i][4]+":"+entity[i][3]);
+                    b._icon.classList.add("b");
+                }
+                if (val == "Preferred Banking") {
+                    var c = L.marker(latlong).on('click', markerOnClick2).addTo(markermap).bindTooltip(entity[i][4]+":"+entity[i][3]);
+            
+                }
+                }
+        }
+        }
+    }
+}
+function filtereff(){
+    document.getElementById('val2').innerHTML = document.getElementById('efficiency').value;
+    removeMarkers();
+    for (let i = 0; i < entity.length; i++) { // show all banks
+        if (entity[i][3]=="Bank ABC"){
+        let bid = entity[i][4];
+        for (let j = 0; j < entity_details.length; j++) { // iteration over input
+            if (entity_details[j][0]==bid && entity_details[j][2]=="Apr" && entity_details[j][3]<=(parseInt(document.getElementById('customers').value)*1000) && entity_details[j][4]<=(parseInt(document.getElementById('transactions').value)*1000000) && entity_details[j][6]<=parseInt(document.getElementById('efficiency').value) && entity_details[j][5]<=parseInt(document.getElementById('nps').value) && entity_details[j][7]<=(parseInt(document.getElementById('revenue').value)*1000000)){
+                let val = entity[i][9]
+                if (val.includes(",")) {
+                    val = val.split(",");
+                }
+                else {
+                    val = val.split(" ")
+                }
+                let latlong = [parseFloat(val[0].trim()),parseFloat(val[1].trim())];
+                val = entity[i][5];
+                if (val == "Regular Banking") {
+                    var a = L.marker(latlong).on('click', markerOnClick2).addTo(markermap).bindTooltip(entity[i][4]+":"+entity[i][3]);
+                    a._icon.classList.add("a");
+                }
+                if (val == "Corporate Banking") {
+                    var b = L.marker(latlong).on('click', markerOnClick2).addTo(markermap).bindTooltip(entity[i][4]+":"+entity[i][3]);
+                    b._icon.classList.add("b");
+                }
+                if (val == "Preferred Banking") {
+                    var c = L.marker(latlong).on('click', markerOnClick2).addTo(markermap).bindTooltip(entity[i][4]+":"+entity[i][3]);
+            
+                }
+                }
+        }
+        }
+    }
+}
+function filternps(){
+    document.getElementById('val3').innerHTML = document.getElementById('nps').value;
+    removeMarkers();
+    for (let i = 0; i < entity.length; i++) { // show all banks
+        if (entity[i][3]=="Bank ABC"){
+        let bid = entity[i][4];
+        for (let j = 0; j < entity_details.length; j++) { // iteration over input
+            if (entity_details[j][0]==bid && entity_details[j][2]=="Apr" && entity_details[j][3]<=(parseInt(document.getElementById('customers').value)*1000) && entity_details[j][4]<=(parseInt(document.getElementById('transactions').value)*1000000) && entity_details[j][6]<=parseInt(document.getElementById('efficiency').value) && entity_details[j][5]<=parseInt(document.getElementById('nps').value) && entity_details[j][7]<=(parseInt(document.getElementById('revenue').value)*1000000)){
+                let val = entity[i][9]
+                if (val.includes(",")) {
+                    val = val.split(",");
+                }
+                else {
+                    val = val.split(" ")
+                }
+                let latlong = [parseFloat(val[0].trim()),parseFloat(val[1].trim())];
+                val = entity[i][5];
+                if (val == "Regular Banking") {
+                    var a = L.marker(latlong).on('click', markerOnClick2).addTo(markermap).bindTooltip(entity[i][4]+":"+entity[i][3]);
+                    a._icon.classList.add("a");
+                }
+                if (val == "Corporate Banking") {
+                    var b = L.marker(latlong).on('click', markerOnClick2).addTo(markermap).bindTooltip(entity[i][4]+":"+entity[i][3]);
+                    b._icon.classList.add("b");
+                }
+                if (val == "Preferred Banking") {
+                    var c = L.marker(latlong).on('click', markerOnClick2).addTo(markermap).bindTooltip(entity[i][4]+":"+entity[i][3]);
+            
+                }
+                }
+        }
+        }
+    }
+}
+function filterRev(){
+    document.getElementById('val4').innerHTML = document.getElementById('revenue').value;
+    removeMarkers();
+    for (let i = 0; i < entity.length; i++) { // show all banks
+        if (entity[i][3]=="Bank ABC"){
+        let bid = entity[i][4];
+        for (let j = 0; j < entity_details.length; j++) { // iteration over input
+            if (entity_details[j][0]==bid && entity_details[j][2]=="Apr" && entity_details[j][3]<=(parseInt(document.getElementById('customers').value)*1000) && entity_details[j][4]<=(parseInt(document.getElementById('transactions').value)*1000000) && entity_details[j][6]<=parseInt(document.getElementById('efficiency').value) && entity_details[j][5]<=parseInt(document.getElementById('nps').value) && entity_details[j][7]<=(parseInt(document.getElementById('revenue').value)*1000000)){
+                let val = entity[i][9]
+                if (val.includes(",")) {
+                    val = val.split(",");
+                }
+                else {
+                    val = val.split(" ")
+                }
+                let latlong = [parseFloat(val[0].trim()),parseFloat(val[1].trim())];
+                val = entity[i][5];
+                if (val == "Regular Banking") {
+                    var a = L.marker(latlong).on('click', markerOnClick2).addTo(markermap).bindTooltip(entity[i][4]+":"+entity[i][3]);
+                    a._icon.classList.add("a");
+                }
+                if (val == "Corporate Banking") {
+                    var b = L.marker(latlong).on('click', markerOnClick2).addTo(markermap).bindTooltip(entity[i][4]+":"+entity[i][3]);
+                    b._icon.classList.add("b");
+                }
+                if (val == "Preferred Banking") {
+                    var c = L.marker(latlong).on('click', markerOnClick2).addTo(markermap).bindTooltip(entity[i][4]+":"+entity[i][3]);
+            
+                }
+                }
+        }
+        }
+    }
+
+}
+
+
+function showpremium(){
+    flag = 2;
+    removeMarkers();
+    for (let i = 0; i < entity.length; i++) { // show all banks
+        val = entity[i][9]
+        if (val.includes(",")) {
+            val = val.split(",");
+        }
+        else {
+            val = val.split(" ")
+        }
+        let latlong = [parseFloat(val[0].trim()),parseFloat(val[1].trim())];
+        val = entity[i][5];
+        if (val == "Corporate Banking" && entity[i][3]=="Bank ABC") {
+            var b = L.marker(latlong).on('click', markerOnClick2).addTo(markermap).bindTooltip(entity[i][4]+":"+entity[i][3]);
+            b._icon.classList.add("b");
+        }
+        
+        
+    }
+
+}
+function showpreferred(){
+    flag = 3;
+    removeMarkers();
+    for (let i = 0; i < entity.length; i++) { // show all banks
+        val = entity[i][9]
+        if (val.includes(",")) {
+            val = val.split(",");
+        }
+        else {
+            val = val.split(" ")
+        }
+        let latlong = [parseFloat(val[0].trim()),parseFloat(val[1].trim())];
+        val = entity[i][5];
+        if (val == "Preferred Banking" && entity[i][3]=="Bank ABC") {
+            var c = L.marker(latlong).on('click', markerOnClick2).addTo(markermap).bindTooltip(entity[i][4]+":"+entity[i][3]);
+    
+        }
+    }
+    
+}
+function showatm(){
+    flag = 4;
+    removeMarkers();
+    for (let i = 0; i < entity.length; i++) { // show all banks
+        val = entity[i][9]
+        if (val.includes(",")) {
+            val = val.split(",");
+        }
+        else {
+            val = val.split(" ")
+        }
+        let latlong = [parseFloat(val[0].trim()),parseFloat(val[1].trim())];
+        val = entity[i][5];
+        if (val == "Regular Banking" && entity[i][3]=="Bank ABC") {
+            var a = L.marker(latlong).on('click', markerOnClick2).addTo(markermap).bindTooltip(entity[i][4]+":"+entity[i][3]);
+            a._icon.classList.add("a");
+        }
+    }
+    
+}
+function showall(){
+    flag = 1;
+    removeMarkers();
+    for (let i = 0; i < entity.length; i++) { // show all banks
+        val = entity[i][9];
+        let bank_name = entity[i][3];
+        if (val.includes(",")) {
+            val = val.split(",");
+        }
+        else {
+            val = val.split(" ")
+        }
+        let latlong = [parseFloat(val[0].trim()),parseFloat(val[1].trim())];
+        val = entity[i][5];
+        if (bank_name == "Bank ABC") {
+        if (val == "Regular Banking") {
+            var a = L.marker(latlong).on('click', markerOnClick2).addTo(markermap).bindTooltip(entity[i][4]+":"+entity[i][3]);
+            a._icon.classList.add("a");
+        }
+        if (val == "Corporate Banking") {
+            var b = L.marker(latlong).on('click', markerOnClick2).addTo(markermap).bindTooltip(entity[i][4]+":"+entity[i][3]);
+            b._icon.classList.add("b");
+        }
+        if (val == "Preferred Banking") {
+            var c = L.marker(latlong).on('click', markerOnClick2).addTo(markermap).bindTooltip(entity[i][4]+":"+entity[i][3]);
+    
+        }
+        }
+        else {
+            var d = L.marker(latlong).on('click').addTo(markermap).bindTooltip(entity[i][4]+":"+entity[i][3]);
+            d._icon.classList.add("d");
+        } 
+    }
+    
+}
+/**for (let i = 0; i < data.length; i++) { // iteration over input
+    let rid = data[i][4];
+    val = data[i][5].split(",")
+    let latlong = [parseFloat(val[0].trim()),parseFloat(val[1].trim())];
+	L.marker(latlong).on('click', markerOnClick1).addTo(markermap); // logs the elements from the current input
+}*/
+//L.marker([24.7926729,46.5841152]).on('click', markerOnClick1).addTo(markermap).bindTooltip("<p>Riyadh Bank</p><p>Bank Type : Govt Bank</p>");
+//L.marker([24.7230499,46.5758106]).on('click', markerOnClick2).addTo(markermap).bindTooltip("<p>The Saudi Investment Bank</p><p>Bank Type : Pvt Bank</p>");
+//L.marker([24.8582607,46.7442107]).on('click', markerOnClick).addTo(markermap).bindTooltip("<p>Al Rajhi Bank</p><p>Bank Type : Govt Bank</p>");
+function markerOnClick1(e){
+let rid = this.getTooltip().getContent().split(":")[0];
+for (let i = 0; i < entity.length; i++) { // iteration over input
+    if (entity[i][9]==rid){
+    val = entity[i][8]
+    if (val.includes(",")) {
+        val = val.split(",");
+    }
+    else {
+        val = val.split(" ")
+    }
+    let latlong = [parseFloat(val[0].trim()),parseFloat(val[1].trim())];
+	L.marker(latlong,{icon: L.divIcon({className: 'poi', html: '<h1>🏦</h1>'})}).on('click', markerOnClick2).addTo(markermap).bindTooltip(entity[i][3]+":"+entity[i][2]);
+    } // logs the elements from the current input
+}
+for (let j = 0; j < facility.length; j++) { // iteration over input
+    if (facility[j][1]==rid){
+    val = facility[j][4]
+    if (val.includes(",")) {
+        val = val.split(",");
+    }
+    else {
+        val = val.split(" ")
+    }
+    let latlong = [parseFloat(val[0].trim()),parseFloat(val[1].trim())];
+    if (facility[j][2]=="Hospital"){L.marker(latlong,{icon: L.divIcon({className: 'poi', html: '<h1>🏥</h1>'})}).addTo(markermap).bindTooltip(facility[j][2]);}
+    if (facility[j][2]=="Restaurant"){L.marker(latlong,{icon: L.divIcon({className: 'poi', html: '<h1>🏩</h1>'})}).addTo(markermap).bindTooltip(facility[j][2]);}
+    if (facility[j][2]=="Coffee Shop"){L.marker(latlong,{icon: L.divIcon({className: 'poi', html: '<h1>☕</h1>'})}).addTo(markermap).bindTooltip(facility[j][2]);}
+    if (facility[j][2]=="School"){L.marker(latlong,{icon: L.divIcon({className: 'poi', html: '<h1>🏫</h1>'})}).addTo(markermap).bindTooltip(facility[j][2]);}
+    if (facility[j][2]=="Mall"){L.marker(latlong,{icon: L.divIcon({className: 'poi', html: '<h1>🛍️</h1>'})}).addTo(markermap).bindTooltip(facility[j][2]);}
+    }
+}
+for (let j = 0; j < offices.length; j++) { // iteration over input
+    if (offices[j][1]==rid){
+    val = offices[j][4]
+    if (val.includes(",")) {
+        val = val.split(",");
+    }
+    else {
+        val = val.split(" ")
+    }
+    let latlong = [parseFloat(val[0].trim()),parseFloat(val[1].trim())];
+    L.marker(latlong,{icon: L.divIcon({className: 'poi', html: '<h3>🏢</h3>'})}).addTo(markermap).bindTooltip("Office Density : "+offices[j][2]);
+    if (offices[j][2]=="High"){
+        L.circle(latlong, {
+            color: 'green',
+            fillColor: 'green',
+            fillOpacity: 0.5,
+            radius: 500
+        }).addTo(markermap).bindTooltip('Dense Office Concentration');
+    }
+    if (offices[j][2]=="Medium"){
+        L.circle(latlong, {
+            color: 'orange',
+            fillColor: 'orange',
+            fillOpacity: 0.5,
+            radius: 500
+        }).addTo(markermap).bindTooltip('Medium Office Concentration');
+    }
+    if (offices[j][2]=="Low"){
+        L.circle(latlong, {
+            color: 'red',
+            fillColor: 'red',
+            fillOpacity: 0.5,
+            radius: 500
+        }).addTo(markermap).bindTooltip('Low Office Concentration');
+    }
+    }
+}
+for (let j = 0; j < residential.length; j++) { // iteration over input
+    if (residential[j][1]==rid){
+    val = residential[j][4]
+    if (val.includes(",")) {
+        val = val.split(",");
+    }
+    else {
+        val = val.split(" ")
+    }
+    let latlong = [parseFloat(val[0].trim()),parseFloat(val[1].trim())];
+    L.marker(latlong,{icon: L.divIcon({className: 'poi', html: '<h3>🏘️</h3>'})}).addTo(markermap).bindTooltip("Residential Density : "+residential[j][2]);
+    if (residential[j][2]=="High"){
+        L.circle(latlong, {
+            color: 'green',
+            fillColor: 'green',
+            fillOpacity: 0.5,
+            radius: 500
+        }).addTo(markermap).bindTooltip('Dense Residential Concentration');
+    }
+    if (residential[j][2]=="Medium"){
+        L.circle(latlong, {
+            color: 'orange',
+            fillColor: 'orange',
+            fillOpacity: 0.5,
+            radius: 500
+        }).addTo(markermap).bindTooltip('Medium Residential Concentration');
+    }
+    if (residential[j][2]=="Low"){
+        L.circle(latlong, {
+            color: 'red',
+            fillColor: 'red',
+            fillOpacity: 0.5,
+            radius: 500
+        }).addTo(markermap).bindTooltip('Low Residential Concentration');
+    }
+}
+}
+}
+
+function markerOnClick2(e){
+    removeHeatLayers();
+    //if (flag == 1) { showall(); }
+    //if (flag == 2) { showpremium(); }
+    //if (flag == 3) { showpreferred(); }
+    //if (flag == 4) { showatm(); }
+    let bid = this.getTooltip().getContent().split(":")[0];
+    let bank = this.getTooltip().getContent().split(":")[1];
+    let s = "";
+    let c = 0;
+    for (let j = 0; j < entity_details.length; j++) { // iteration over input
+        if (entity_details[j][0]==bid && entity_details[j][2]=="Apr"){
+            s+="<h4>"+bank+" Data</h4><table><thead><tr><th>Year</th><th>"+String(entity_details[j][1])+"</th></tr></thead><tbody>";
+            s+=("<tr><td>Month</td>");
+            s+=("<td>"+String(entity_details[j][2])+"</td></tr>");
+            s+=("<tr><td>Tot Cust</td>");
+            s+=("<td>"+String(entity_details[j][3]>1000 ? String(parseInt(entity_details[j][3]/1000))+'K' : entity_details[j][3])+"</td></tr>");
+            s+=("<tr><td>Txn</td>");
+            s+=("<td>"+String(entity_details[j][4]>1000000 ? String(parseInt(entity_details[j][4]/1000000))+'M' : entity_details[j][4])+"</td></tr>");
+            s+=("<tr><td>NPS</td>");
+            s+=("<td>"+String(entity_details[j][5])+"</td></tr>");
+            s+=("<tr><td>Eff %</td>");
+            s+=("<td>"+String(entity_details[j][6])+"</td></tr>");
+            s+=("<tr><td>Rev</td>");
+            s+=("<td>"+String(entity_details[j][7]>1000000 ? String(parseInt(entity_details[j][7]/1000000))+'M' : entity_details[j][7])+"</td></tr>");
+            /**s+=("<td>"+String(entity_details[j][3]>1000 ? String(parseInt(entity_details[j][3]/1000))+'K' : entity_details[j][3])+"</td>");
+            s+=("<td>"+String(entity_details[j][4]>1000000 ? String(parseInt(entity_details[j][4]/1000000))+'M' : entity_details[j][4])+"</td>");
+            s+=("<td>"+String(entity_details[j][5])+"</td>");
+            s+=("<td>"+String(entity_details[j][6])+"</td>");
+            s+=("<td>"+String(entity_details[j][7]>1000000 ? String(parseInt(entity_details[j][7]/1000000))+'M' : entity_details[j][7])+"</td></tr>");*/
+        }
+    }
+    s+="</tbody></table>"
+    for (let j = 0; j < customer_branchmap.length; j++) { // iteration over input
+        if (customer_branchmap[j][0]==bid){
+            val = customer_branchmap[j][1]
+            if (val.includes(",")) {
+                val = val.split(",");
+            }
+            else {
+                val = val.split(" ")
+            }
+            let latlong = [parseFloat(val[0].trim())+0.015,parseFloat(val[1].trim())+0.015];
+            L.marker(latlong,{icon: L.divIcon({className: 'poi', html: '<h3></h3>'})}).addTo(markermap).bindTooltip(bank+" Customer Concentration");
+            /**L.circle(latlong, {
+                color: 'pink',
+                fillColor: 'pink',
+                fillOpacity: 0.5,
+                radius: 500
+            }).addTo(markermap).bindTooltip(bank+" Customer Presence");*/
+            var hl = L.heatLayer([
+            [parseFloat(val[0].trim())+0.015,parseFloat(val[1].trim())+0.015],
+            [parseFloat(val[0].trim()),parseFloat(val[1].trim())],
+            [parseFloat(val[0].trim())+0.03,parseFloat(val[1].trim())],
+            [parseFloat(val[0].trim())+0.03,parseFloat(val[1].trim())+0.03],
+            [parseFloat(val[0].trim()),parseFloat(val[1].trim())+0.03]
+            ], {
+                maxZoom: 10
+            }).addTo(markermap).bindTooltip(bank+" Customer Heatmap");
+            L.polygon([
+                     [parseFloat(val[0].trim()),parseFloat(val[1].trim())],
+                     [parseFloat(val[0].trim())+0.03,parseFloat(val[1].trim())],
+                     [parseFloat(val[0].trim())+0.03,parseFloat(val[1].trim())+0.03],
+                     [parseFloat(val[0].trim()),parseFloat(val[1].trim())+0.03]
+                 ], {
+                     color: 'red',
+                     fillColor: 'red',
+                 }).addTo(markermap).bindTooltip(bank+" Customer Presence");
+        }
+    }
+    var popup = L.popup()
+                .setLatLng(this.getLatLng())
+                .setContent(s)
+                .openOn(markermap);
+    //markermap.bindPopup(popup,{maxWidth : "auto"});
+}
+// L.circle([24.7230499,46.5758106], {
+//     color: 'orange',
+//     fillColor: 'orange',
+//     fillOpacity: 0.5,
+//     radius: 5000
+// }).addTo(markermap);
+// L.circle([24.8582607,46.7442107], {
+//     color: 'grey',
+//     fillColor: 'grey',
+//     fillOpacity: 0.5,
+//     radius: 5000
+// }).addTo(markermap);
+
+// L.polygon([
+//     [51.509, -0.08],
+//     [51.503, -0.06],
+//     [51.51, -0.047]
+// ], {
+//     color: '#405189',
+//     fillColor: '#405189',
+// }).addTo(markermap);
+
+
+// // Working with popups
+// var popupmap = L.map('leaflet-map-popup').setView([51.505, -0.09], 13);
+
+// L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+//     maxZoom: 18,
+//     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+//         '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+//         'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+//     id: 'mapbox/streets-v11',
+//     tileSize: 512,
+//     zoomOffset: -1
+// }).addTo(popupmap);
+
+// L.marker([51.5, -0.09]).addTo(popupmap)
+//     .bindPopup("<b>Hello world!</b><br />I am a popup.").openPopup();
+
+// L.circle([51.508, -0.11], 500, {
+//     color: '#f06548',
+//     fillColor: '#f06548',
+//     fillOpacity: 0.5
+// }).addTo(popupmap).bindPopup("I am a circle.");
+
+// L.polygon([
+//     [51.509, -0.08],
+//     [51.503, -0.06],
+//     [51.51, -0.047]
+// ], {
+//     color: '#405189',
+//     fillColor: '#405189',
+// }).addTo(popupmap).bindPopup("I am a polygon.");
+
+// var popup = L.popup();
+
+// // leaflet-map-custom-icons
+// var customiconsmap = L.map('leaflet-map-custom-icons').setView([51.5, -0.09], 13);
+
+// L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+//     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+// }).addTo(customiconsmap);
+
+// var LeafIcon = L.Icon.extend({
+//     options: {
+//         iconSize: [45, 45],
+//         iconAnchor: [22, 94],
+//         popupAnchor: [-3, -76]
+//     }
+// });
+
+// var greenIcon = new LeafIcon({
+//     iconUrl: '/static/images/logo-sm.png'
+// });
+
+// L.marker([51.5, -0.09], {
+//     icon: greenIcon
+// }).addTo(customiconsmap);
+
+// // Interactive Choropleth Map
+// var interactivemap = L.map('leaflet-map-interactive-map').setView([37.8, -96], 4);
+
+// L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+//     maxZoom: 18,
+//     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+//         '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+//         'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+//     id: 'mapbox/light-v9',
+//     tileSize: 512,
+//     zoomOffset: -1
+// }).addTo(interactivemap);
+
+// // get color depending on population density value
+// function getColor(d) {
+//     return d > 1000 ? '#405189' :
+//         d > 500 ? '#516194' :
+//         d > 200 ? '#63719E' :
+//         d > 100 ? '#7480A9' :
+//         d > 50 ? '#8590B4' :
+//         d > 20 ? '#97A0BF' :
+//         d > 10 ? '#A8B0C9' :
+//         '#A8B0C9';
+// }
+
+// function style(feature) {
+//     return {
+//         weight: 2,
+//         opacity: 1,
+//         color: 'white',
+//         dashArray: '3',
+//         fillOpacity: 0.7,
+//         fillColor: getColor(feature.properties.density)
+//     };
+// }
+
+// var geojson = L.geoJson(statesData, {
+//     style: style,
+// }).addTo(interactivemap);
+
+// // leaflet-map-group-control
+// var cities = L.layerGroup();
+
+// L.marker([39.61, -105.02]).bindPopup('This is Littleton, CO.').addTo(cities),
+//     L.marker([39.74, -104.99]).bindPopup('This is Denver, CO.').addTo(cities),
+//     L.marker([39.73, -104.8]).bindPopup('This is Aurora, CO.').addTo(cities),
+//     L.marker([39.77, -105.23]).bindPopup('This is Golden, CO.').addTo(cities);
+
+
+// var mbAttr = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+//     '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+//     'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+//     mbUrl = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
+
+// var grayscale = L.tileLayer(mbUrl, {
+//         id: 'mapbox/light-v9',
+//         tileSize: 512,
+//         zoomOffset: -1,
+//         attribution: mbAttr
+//     }),
+//     streets = L.tileLayer(mbUrl, {
+//         id: 'mapbox/streets-v11',
+//         tileSize: 512,
+//         zoomOffset: -1,
+//         attribution: mbAttr
+//     });
+
+// var layergroupcontrolmap = L.map('leaflet-map-group-control', {
+//     center: [39.73, -104.99],
+//     zoom: 10,
+//     layers: [streets, cities]
+// });
+
+// var baseLayers = {
+//     "Grayscale": grayscale,
+//     "Streets": streets
+// };
+
+// var overlays = {
+//     "Cities": cities
+// };
+
+// L.control.layers(baseLayers, overlays).addTo(layergroupcontrolmap);
+</script>
+
+{% endblock extra_js %}
